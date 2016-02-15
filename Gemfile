@@ -23,7 +23,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'spring'
 	gem 'web-console'
 	gem 'guard-bundler'
   gem 'guard-rails'
