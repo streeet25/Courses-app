@@ -1,0 +1,7 @@
+= simple_form_for @course do |f|
+  .left
+    = f.input :title
+  .field
+    = f.file_field :picture
+  .actions
+    = f.submit "Save", :class => "btn-xs btn-success rating-submit-btn margin-rating-form"

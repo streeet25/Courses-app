@@ -13,6 +13,7 @@ gem 'simple_form'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'kaminari'
+gem 'haml'
 
 group :development, :test do
   gem 'byebug'
