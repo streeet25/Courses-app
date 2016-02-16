@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'course#index'
+  root to: 'courses#index'
   resources :courses
 
   # The priority is based upon order of creation: first created -> highest priority.
