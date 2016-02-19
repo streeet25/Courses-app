@@ -1,4 +1,3 @@
-
 class CoursePictureUploader < BaseUploader
 
   version :admin_thumb do
