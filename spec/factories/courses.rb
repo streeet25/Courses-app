@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :course do
-    title "MyString"
-    active false
+    user
+
+    sequence(:title)  { |n| "Course-#{n}" }
+    active { true }
   end
 end
