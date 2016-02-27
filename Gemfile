@@ -15,13 +15,14 @@ gem 'mini_magick'
 gem 'kaminari'
 gem 'haml'
 gem 'rubocop'
+gem 'rspec-rails'
+gem 'devise'
 
 group :development, :test do
   gem 'byebug'
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'pry-rescue'
-  gem 'rspec-rails'
 end
 
 group :development do
