@@ -25,7 +25,7 @@ class Users::CoursesController < Users::BaseController
   end
 
   def update
-    if @course.update(course_params)
+    if @course.update(courses_params)
       redirect_to users_courses_path
     else
       render :edit

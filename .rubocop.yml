@@ -8,6 +8,9 @@ AllCops:
     - 'bin/*'
     - 'spec/*'
     - 'db/schema.rb'
+    - 'db/migrate/20160226232856_devise_create_users.rb'
+    - 'app/controllers/users/base_controller.rb'
+    - 'app/controllers/users/courses_controller.rb'
   TargetRubyVersion: 2.2
   DisplayCopNames: true
 
