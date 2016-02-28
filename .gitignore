@@ -29,3 +29,4 @@ doc/
 .secret
 public/system/uploads/course/picture
 Gemfile.lock
+public/assets

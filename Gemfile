@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.2.2'
 
 gem 'sprockets', '~> 3.0'
 gem 'rails'
@@ -17,6 +18,12 @@ gem 'haml'
 gem 'rubocop'
 gem 'rspec-rails'
 gem 'devise'
+gem 'rails_12factor'
+
+group :assets do
+  gem 'therubyracer'
+  gem 'uglifier'
+end
 
 group :development, :test do
   gem 'byebug'
