@@ -1,13 +1,13 @@
-%h1 Course
-= link_to 'New Course' , new_course_path
-- if @courses.present?
-  %ul
-    - @courses.each do |f|
-      %li
-        = image_tag f.picture.thumb
-      %li
-        = f.title
-      = link_to 'Edit course', edit_course_path(f)
-      = link_to 'Delete project', course_path(f), method: :delete, data: { confirm: "Sure?" }
-- else
-  %h2 No courses
+.content
+  .row
+    .col-md-12
+      - if @courses.present?
+        - @courses.each do |course|
+          .col-md-3
+            .thumbnail
+              = course.title.humanize
+              %br
+              = image_tag course.picture.admin_thumb
+        = paginate @courses
+      - else
+        %h2 No courses
