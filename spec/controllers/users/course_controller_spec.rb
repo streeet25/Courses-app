@@ -10,21 +10,22 @@ RSpec.describe Users::CoursesController, type: :controller do
 
     context "when user logged in" do
       before do
-        @course = double(:recent)
+        @courses = double
+        @courses.stub_chain(:recent, :page, :per).and_return('example')
         allow(@logged_in_user).to receive(:courses) { @courses }
         get :index
       end
 
-      xit "is should return http status succes" do
+      it "is should return http status succes" do
         expect(response).to have_http_status(:ok)
       end
 
-      xit "renders 'index template'" do
-        expect(response).to render_template('index')
+      it "renders 'index template'" do
+        expect(response).to render_template(:index)
       end
 
-      xit "assign ratings as ratings" do
-        expect(assigns(:courses)).to eq(@courses)
+      it "assign courses as courses" do
+        expect(assigns(:courses)).to eq('example')
       end
     end
 
