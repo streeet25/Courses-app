@@ -2,12 +2,15 @@
   .row
     .col-md-12
       - if @courses.present?
-        - @courses.each do |course|
-          .col-md-3
-            .thumbnail
-              = course.title.humanize
-              %br
-              = image_tag course.picture.admin_thumb
-        = paginate @courses
+        .container
+          - @courses.each do |course|
+            .col-md-3
+              .thumbnail
+                = course.title.humanize
+                %br
+                = image_tag course.picture.admin_thumb
+        .row
+          .col-md-offset-5
+            = paginate @courses
       - else
         %h2 No courses

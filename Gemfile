@@ -18,7 +18,11 @@ gem 'haml'
 gem 'rubocop'
 gem 'rspec-rails'
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 gem 'rails_12factor'
+
 
 group :assets do
   gem 'therubyracer'
@@ -31,6 +35,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'faker'
+  gem 'dotenv-rails', :require => 'dotenv/rails-now'
 end
 
 group :development do
