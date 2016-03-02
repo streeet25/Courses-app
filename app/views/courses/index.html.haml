@@ -9,6 +9,8 @@
                 = course.title.humanize
                 %br
                 = image_tag course.picture.admin_thumb
+                %br
+                =li= link_to 'Participants', course_participants_path(course)
         .row
           .col-md-offset-5
             = paginate @courses

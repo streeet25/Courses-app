@@ -45,6 +45,7 @@ group :development do
   gem 'guard-rspec'
   gem 'better_errors'
   gem 'spring'
+  gem 'bullet'
 end
 
 group :test do

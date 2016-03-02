@@ -1,0 +1,13 @@
+%h1 Course #{@course.title} participants
+
+- if user_signed_in?
+  #subscription-button{ style: ('display: none' if current_user.participate_in?(course)) }
+    = link_to 'Subscribe', course_subscriptions_path(course), method: :post, remote: true
+
+%table.table.table-bbordered
+  %tbody#participants-list
+    %tr
+      %th User
+      %th Action
+    - @users.each do |user|
+      =render 'participant', course: course, user: user 
