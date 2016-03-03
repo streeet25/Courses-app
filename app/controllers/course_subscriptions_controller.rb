@@ -1,7 +1,7 @@
 class CourseSubscriptionsController < ApplicationController
 	before_filter :authenticate_user!
 
-  def create
+  def update
   	course.participants << current_user
   end
 
@@ -15,5 +15,4 @@ class CourseSubscriptionsController < ApplicationController
     @course ||= Course.find(params[:course_id])
   end
   helper_method :course
-
 end

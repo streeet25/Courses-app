@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   resources :courses, only: :index do
   	resources :participants, only: :index
-  	resource  :subscriptions, only: [:create, :destroy], controller: :course_subscriptions
+  	resource  :subscriptions, only: [:update, :destroy], controller: :course_subscriptions
+    resource  :kick, only: [:destroy], controller: :course_kick
   end
 
   namespace :users do
