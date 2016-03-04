@@ -4,7 +4,7 @@ module Omniauthable
   included do
     attr_accessor :social_login
 
-    def self.find_or_create_with_oauth(oauth_data, user_data={})
+    def self.find_or_create_with_oauth(oauth_data, _user_data={})
       find_with_oauth(oauth_data) || create_with_oauth(oauth_data)
     end
 

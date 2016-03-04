@@ -1,9 +1,9 @@
 class CreateSocialProfiles < ActiveRecord::Migration
   def change
     create_table :social_profiles do |t|
-    	t.integer :user_id
-    	t.string  :uid 
-    	t.string  :service_name
+      t.integer :user_id
+      t.string  :uid
+      t.string  :service_name
 
       t.timestamps null: false
     end

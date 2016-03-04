@@ -1,0 +1,15 @@
+var node = $('*[data-role="lesson<%= @course_lesson.id %>"]');
+var new_node_html = '<%= j render @course_lesson %>';
+
+node.replaceWith(new_node_html);
+// app/assets/javascripts/application.js
+
+//= require jquery
+//= require jquery_ujs
+//= require sortable
+
+//= require jquery-ui/sortable
+
+$(document).ready(function(){
+  $('*[data-role=activerecord_sortable]').activerecord_sortable();
+});

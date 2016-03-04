@@ -5,6 +5,7 @@ gem 'sprockets', '~> 3.0'
 gem 'rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-ui-rails'
+gem 'activerecord-sortable'
 gem 'sass-rails', '>= 3.2'
 gem 'coffee-rails'
 gem 'jquery-rails'
@@ -23,7 +24,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'rails_12factor'
 
-
 group :assets do
   gem 'therubyracer'
   gem 'uglifier'
@@ -35,7 +35,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'faker'
-  gem 'dotenv-rails', :require => 'dotenv/rails-now'
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
 end
 
 group :development do

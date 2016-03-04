@@ -11,10 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303125453) do
+ActiveRecord::Schema.define(version: 20160304190942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "course_lessons", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "position",      null: false
+    t.string   "description"
+    t.string   "lecture_notes"
+    t.string   "picture"
+    t.string   "home_task"
+    t.integer  "course_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "course_lessons", ["position"], name: "index_course_lessons_on_position", using: :btree
+
+  create_table "course_requests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "course_requests", ["course_id"], name: "index_course_requests_on_course_id", using: :btree
+  add_index "course_requests", ["user_id"], name: "index_course_requests_on_user_id", using: :btree
 
   create_table "course_users", force: :cascade do |t|
     t.integer  "user_id"
@@ -75,4 +99,6 @@ ActiveRecord::Schema.define(version: 20160303125453) do
 
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "course_requests", "courses"
+  add_foreign_key "course_requests", "users"
 end

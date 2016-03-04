@@ -1,0 +1,10 @@
+%li{"data-move-url" => move_users_course_lesson_path(course_lesson), "data-position" => course_lesson.position, "data-role" => "lesson#{course_lesson.id}"}
+  .col-md-4
+    %h4 = lesson.title
+    = image_tag lesson.picture.thumb
+  .col-md-8
+    = lesson.description
+  .col-md-8
+    = lesson.lecture_notes
+  .col-md-8
+    = lesson.home_task

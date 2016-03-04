@@ -10,12 +10,10 @@ class Users::ProfileController < Users::BaseController
     end
   end
 
-  private 
+  private
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation,
-                                profile_attributes: [:first_name, :last_name])
+                                 profile_attributes: [:first_name, :last_name])
   end
  end
-
-
