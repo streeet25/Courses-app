@@ -54,6 +54,6 @@ class Users::CoursesController < Users::BaseController
   end
 
   def courses_params
-    params.require(:course).permit(:title, :picture)
+    params.require(:course).permit(:title, :picture, :hiden)
   end
 end
