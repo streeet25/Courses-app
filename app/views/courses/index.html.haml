@@ -6,7 +6,7 @@
           - @courses.each do |course|
             .col-md-3
               .thumbnail
-                = course.title.humanize
+                = link_to course.title.humanize, course_path(course)
                 %br
                 = image_tag course.picture.admin_thumb
                 %br

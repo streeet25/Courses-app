@@ -1,10 +1,16 @@
-%li{"data-move-url" => move_users_course_lesson_path(course_lesson), "data-position" => course_lesson.position, "data-role" => "lesson#{course_lesson.id}"}
-  .col-md-4
-    %h4 = lesson.title
-    = image_tag lesson.picture.thumb
-  .col-md-8
-    = lesson.description
-  .col-md-8
-    = lesson.lecture_notes
-  .col-md-8
-    = lesson.home_task
+%li.container
+  .col-md-2
+    = image_tag course_lesson.picture.thumb
+  .col-md-2
+    %h4= course_lesson.title
+  .row
+    .col-md-2
+      = course_lesson.description
+  .col-md-2
+    = course_lesson.lecture_notes
+  .col-md-2
+    = course_lesson.home_task
+  .col-md-2
+    = link_to "Edit", edit_users_course_lesson_path(course_lesson), :class => 'btn btn-success btn-xs'
+    = link_to "Destroy", users_course_lesson_path(course_lesson), :method => :delete, data: { :confirm => "Are you sure?" }, :class => 'btn btn-danger btn-xs'
+    = link_to 'Back', url_for(:back), :class => 'btn btn-default  rating-item-btn'

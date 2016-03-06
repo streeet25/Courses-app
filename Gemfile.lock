@@ -37,6 +37,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_list (0.7.2)
+      activerecord (>= 3.0)
     arel (6.0.3)
     ast (2.2.0)
     autoprefixer-rails (6.3.3.1)
@@ -312,6 +314,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-sortable
+  acts_as_list
   better_errors
   bootstrap-sass (~> 3.3.6)
   bullet

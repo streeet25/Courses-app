@@ -23,6 +23,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'rails_12factor'
+gem 'acts_as_list'
 
 group :assets do
   gem 'therubyracer'

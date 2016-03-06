@@ -1,0 +1,8 @@
+- if @course_lessons.present?
+  %ol
+    - @course_lessons.each do |lesson|
+      %li.container
+      = lesson.title
+- else 
+  %h2.rating-h1 No lessons now.
+  

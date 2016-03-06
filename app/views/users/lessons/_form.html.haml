@@ -4,8 +4,10 @@
       %h2 Main info
       = f.input :title, :label => "Title"
       = f.input :description, :label => "Lesson description"
+      = f.select(:position, 1..@lesson_count)
       = f.input :lecture_notes, :label => "Lecture notes"
       = f.input :home_task, :label => "Home work"
+      = f.input :hiden, as: :boolean
       .container.col-md-12
         %p.left Picture
         = f.file_field :picture, :label => "Image", :class => 'right'
