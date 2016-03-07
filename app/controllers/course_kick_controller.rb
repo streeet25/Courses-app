@@ -2,13 +2,18 @@ class CourseKickController < ApplicationController
   before_filter :authenticate_user!
 
   def update
-    course.course_users.update
+  	course.participants << user
+    course.course_users.(:kick)
   end
 
   private
 
   def course
-    @course ||= Course.find(params[:course_id])
+    @course = Course.find(params[:course_id])
   end
-  helper_method :course
+
+  def user
+  	@user = User.find(params[:user_id])
+  end
+  helper_method :course, :user
 end

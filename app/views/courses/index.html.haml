@@ -9,8 +9,11 @@
                 = link_to course.title.humanize, course_path(course)
                 %br
                 = image_tag course.picture.admin_thumb
-                %br
-                = link_to 'Participants', course_participants_path(course)
+                -  if current_user && course.course_users.where(kick: true).present?
+                  %p You are deducted
+                - else
+                  %br
+                  = link_to 'Participants', course_participants_path(course)
         .row
           .col-md-offset-5
             = paginate @courses

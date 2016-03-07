@@ -21,4 +21,5 @@
 //= require app
 //= require demo 
 //= require pages/dashboard
+//= require bootstrap/modal
 //

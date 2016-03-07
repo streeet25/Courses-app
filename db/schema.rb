@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160305000749) do
+ActiveRecord::Schema.define(version: 20160307181024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "black_lists", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "black_lists", ["user_id", "course_id"], name: "index_black_lists_on_user_id_and_course_id", unique: true, using: :btree
 
   create_table "course_lessons", force: :cascade do |t|
     t.string   "title"
@@ -62,6 +71,16 @@ ActiveRecord::Schema.define(version: 20160305000749) do
   end
 
   add_index "courses", ["user_id"], name: "index_courses_on_user_id", using: :btree
+
+  create_table "hometasks", force: :cascade do |t|
+    t.text     "hometask_text",    null: false
+    t.integer  "user_id"
+    t.integer  "course_lesson_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "hometasks", ["user_id", "course_lesson_id"], name: "index_hometasks_on_user_id_and_course_lesson_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id"

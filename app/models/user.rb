@@ -8,8 +8,9 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :authored_courses, class_name: 'Course', foreign_key: :user_id
   has_many :social_profiles, -> { where(kick: false) }
-  has_many :course_users
+  has_many :course_users, dependent: :destroy
   has_many :participated_courses, through: :course_users, source: :course
+  has_many :home_taks, dependent: :destroy
 
   accepts_nested_attributes_for :profile
 
