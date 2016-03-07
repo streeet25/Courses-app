@@ -1,14 +1,13 @@
 class Users::LessonsController < Users::BaseController
-  before_action :find_course
-  before_action :find_lesson, only: [:edit, :update, :destroy]
+  before_action :find_course, :find_lesson, only: [:edit, :update, :destroy]
 
   def new
-    @lesson = @course.lessons.new
-    @lesson_count = @course.lessons.count + 1
+    @lesson = find_course.lessons.new
+    @lesson_count = find_course.lessons.count + 1
   end
 
   def create
-    @lesson = @course.lessons.new(lesson_params)
+    @lesson = find_course.lessons.new(lesson_params)
 
     if @lesson.save
       flash[:success] = 'Lesson was successsfull created.'
@@ -20,7 +19,7 @@ class Users::LessonsController < Users::BaseController
   end
 
   def edit
-    @lesson_count = @course.count
+    @lesson_count = find_course.lessons.count
   end
 
   def update
@@ -34,6 +33,7 @@ class Users::LessonsController < Users::BaseController
   end
 
   def destroy
+    @lesson.destroy
     redirect_to users_course_path(@course)
   end
 

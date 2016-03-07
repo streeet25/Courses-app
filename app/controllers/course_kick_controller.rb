@@ -1,11 +1,8 @@
 class CourseKickController < ApplicationController
   before_filter :authenticate_user!
 
-  def destroy
-    course.course_users.first.destroy
-    respond_to do |format|
-      format.js { render inline: 'location.reload();' }
-    end
+  def update
+    course.course_users.update
   end
 
   private

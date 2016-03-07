@@ -4,4 +4,5 @@
     - if user_signed_in? && user.id == current_user.id
       = link_to 'Unsubscribe', course_subscriptions_path(course), method: :delete, remote: true
     - if user_signed_in? && current_user.id == course.user.id
-      = link_to 'Kick', course_kick_path(course), method: :delete, remote: true
+      = link_to('Kick', update_opinion_course_subscriptions_path(course), :method => :post)
+      
