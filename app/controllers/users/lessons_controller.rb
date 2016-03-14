@@ -1,5 +1,8 @@
 class Users::LessonsController < Users::BaseController
-  before_action :find_course, :find_lesson, only: [:edit, :update, :destroy]
+  before_action :find_course, :find_lesson, only: [:show, :edit, :update, :destroy]
+
+  def show
+  end
 
   def new
     @lesson = find_course.lessons.new
@@ -40,14 +43,16 @@ class Users::LessonsController < Users::BaseController
   private
 
   def find_course
-    @course = current_user.authored_courses.find(params[:course_id])
+    @course = Course.find(params[:course_id])
   end
+  helper_method :find_course
 
   def find_lesson
     @lesson = find_course.lessons.find(params[:id])
   end
+  helper_method :find_lesson
 
   def lesson_params
-    params.require(:course_lesson).permit(:title, :position, :description, :lecture_notes, :picture, :home_task)
+    params.require(:lesson).permit(:title, :position, :description, :lecture_notes, :picture, :home_task)
   end
 end

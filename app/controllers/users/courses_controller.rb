@@ -33,7 +33,7 @@ class Users::CoursesController < Users::BaseController
   end
 
   def show
-    @course_lessons = find_course.lessons.sorted.page(params[:page]).per(params[:per_page] || PER_PAGE)
+    @lessons = find_course.lessons.sorted.page(params[:page]).per(params[:per_page] || PER_PAGE)
   end
 
   def destroy
@@ -47,6 +47,7 @@ class Users::CoursesController < Users::BaseController
   def find_course
     @course = current_user.authored_courses.find(params[:id])
   end
+  helper_method :find_course
 
   def courses_params
     params.require(:course).permit(:title, :picture, :hiden)

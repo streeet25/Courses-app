@@ -5,15 +5,16 @@ Rails.application.routes.draw do
 
   resources :courses, only: [:index, :show] do
     resources :participants, only: :index
-    resource  :subscriptions, only: [:update, :destroy], controller: :course_subscriptions
-    resource :kick, only: [:update], controller: :course_kick
+    resource  :subscriptions, only: [:update, :destroy], controller: :course_subscriptions do
+      patch :kick, on: :member
+    end
   end
 
   namespace :users do
     resource  :profile, only: [:edit, :update], controller: :profile
     resources :courses do
       resources :lessons, except: :index do
-        resources :hometasks, except: :index
+        resources :hometasks
       end
     end
   end

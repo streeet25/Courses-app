@@ -1,8 +1,6 @@
-- if @course_lessons.present?
-  %ol
-    - @course_lessons.each do |lesson|
-      %li.container
-      = lesson.title
-- else 
-  %h2.rating-h1 No lessons now.
-  
+.margin-top-10
+  - if @lessons.present?
+    %ol.list-group= render @lessons
+    = link_to 'Back', url_for(:back), :class => 'btn btn-default'
+  - else
+    %h2.rating-h1 You don't have lessons now.

@@ -6,10 +6,11 @@
           - @courses.each do |course|
             .col-md-3
               .thumbnail
-                = link_to course.title.humanize, course_path(course)
+                - if user_signed_in?
+                  = link_to course.title.humanize, course_path(course)
                 %br
                 = image_tag course.picture.admin_thumb
-                -  if current_user && course.course_users.where(kick: true).present?
+                - if current_user.try(:banned_in?, course)
                   %p You are deducted
                 - else
                   %br

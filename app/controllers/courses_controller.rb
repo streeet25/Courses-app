@@ -6,12 +6,17 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course_lesson = find_course.lessons.where(hiden: false)
+    @lessons = find_lesson.where(hiden: false)
   end
 
   private
 
   def find_course
-    @course = current_user.authored_courses.find(params[:id])
+    @course = Course.find(params[:id])
+  end
+  helper_method :find_course
+
+  def find_lesson
+    @lesson = find_course.lessons
   end
 end

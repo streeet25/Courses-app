@@ -2,7 +2,10 @@
   %td= "#{user.first_name} #{user.last_name}"
   %td
     - if user_signed_in? && user.id == current_user.id
-      = link_to 'Unsubscribe', course_subscriptions_path(course), method: :delete, remote: true
+      #unsubscribe-button{ style: ('display: none' if current_user.banned_in?(course)) }
+        = link_to 'Unsubscribe', course_subscriptions_path(course), method: :delete, remote: true
     - if user_signed_in? && current_user.id == course.user.id
-      = link_to 'Kick',  course_kick_path(course, user_id: user.id), method: :put, remote: true
-      
+      #kick-button{ style: ('display: none' if user.banned_in?(course)) }
+        = link_to "Kick", kick_course_subscriptions_path(course, user_id: user.id), method: :patch, remote: true
+      #text{ style: ('display: none' if not user.banned_in?(course)) }
+        %p banned

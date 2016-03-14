@@ -9,9 +9,10 @@ class CourseSubscriptionsController < ApplicationController
     course.course_users.where(user_id: current_user).first.destroy
   end
 
-  def update_opinion
-   course.course_users.where(user_id: course_users.id).update(:kick, true)
-   redirect_to :back
+  def kick
+    course_user = CourseUser.where(course_id: params[:course_id], user_id: params[:user_id]).first
+
+    course_user.update_attribute(:kick, true) if course_user
   end
 
   private
@@ -20,6 +21,9 @@ class CourseSubscriptionsController < ApplicationController
     @course ||= Course.find(params[:course_id])
   end
 
-  
+  def user
+    @user = User.find(params[:user_id])
+  end
+
   helper_method :course
 end
