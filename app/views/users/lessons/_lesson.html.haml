@@ -12,7 +12,7 @@
     = lesson.home_task
   .col-md-2
     - if user_signed_in? && current_user.id = find_course.user.id
-      = link_to 'Show Homeworks', users_course_lesson_hometasks_path(@course, lesson), class: "btn btn-primary"
-    = link_to "Edit", edit_users_course_lesson_path(@course, lesson), :class => 'btn btn-success btn-xs'
-    = link_to "Destroy", users_course_lesson_path(@course, lesson), :method => :delete, data: { :confirm => "Are you sure?" }, :class => 'btn btn-danger btn-xs'
+      = link_to 'Show Homeworks', users_course_lesson_hometasks_path(find_course, lesson), class: "btn btn-primary"
+    = link_to "Edit", edit_users_course_lesson_path(find_course, lesson), :class => 'btn btn-success btn-xs'
+    = link_to "Destroy", users_course_lesson_path(find_course, lesson), :method => :delete, data: { :confirm => "Are you sure?" }, :class => 'btn btn-danger btn-xs'
     = link_to 'Back', url_for(:back), :class => 'btn btn-default'

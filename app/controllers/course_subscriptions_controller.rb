@@ -6,7 +6,11 @@ class CourseSubscriptionsController < ApplicationController
   end
 
   def destroy
-    course.course_users.where(user_id: current_user).first.destroy
+    if current_user.course_users.where(kick: true).exists?(course_id: course.id)
+      course.course_users.where(user_id: current_user).first.destroy
+    else
+      flash[:error] = 'You are banned.'
+    end
   end
 
   def kick
@@ -20,10 +24,10 @@ class CourseSubscriptionsController < ApplicationController
   def course
     @course ||= Course.find(params[:course_id])
   end
+  helper_method :course
 
   def user
     @user = User.find(params[:user_id])
   end
-
-  helper_method :course
+  helper_method :user
 end

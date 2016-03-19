@@ -22,8 +22,9 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
-gem 'rails_12factor'
 gem 'acts_as_list'
+gem 'rolify'
+gem 'cancancan'
 
 group :assets do
   gem 'therubyracer'

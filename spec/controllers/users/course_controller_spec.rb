@@ -11,7 +11,7 @@ RSpec.describe Users::CoursesController, type: :controller do
     context "when user logged in" do
       before do
         @courses = double
-        @courses.stub_chain(:recent, :page, :per).and_return("example")
+        @courses.stub_chain(:recent, :page, :per) {:baz}
         allow(@logged_in_user).to receive(:courses) { @courses }
         get :index
       end
@@ -25,7 +25,7 @@ RSpec.describe Users::CoursesController, type: :controller do
       end
 
       xit "assign courses as courses" do
-        expect(assigns(:courses)).to eq("example")
+        expect(assigns(:courses)).to eq(:baz)
       end
     end
 

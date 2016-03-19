@@ -1,10 +1,14 @@
 class Users::CoursesController < Users::BaseController
+  before_filter :load_course, except: :index
+  before_action :my_courses, only: :index
+
   PER_PAGE = 3
 
   before_action :find_course, only: [:edit, :update, :show, :destroy]
 
   def index
-    @courses = current_user.authored_courses.recent.page(params[:page]).per(params[:per_page] || PER_PAGE)
+    my_courses.sort! { |a, b| a.updated_at <=> b.updated_at }
+    @paginatable_array = Kaminari.paginate_array(my_courses).page(params[:page]).per(params[:per_page] || PER_PAGE)
   end
 
   def new
@@ -18,6 +22,7 @@ class Users::CoursesController < Users::BaseController
       redirect_to users_courses_path
     else
       render :new
+      flash[:error] = 'You dont have rights to create course.'
     end
   end
 
@@ -44,12 +49,20 @@ class Users::CoursesController < Users::BaseController
 
   private
 
+  def my_courses
+    @courses = current_user.authored_courses + current_user.participated_courses
+  end
+
   def find_course
-    @course = current_user.authored_courses.find(params[:id])
+    @course = Course.find(params[:id])
   end
   helper_method :find_course
 
   def courses_params
     params.require(:course).permit(:title, :picture, :hiden)
+  end
+
+  def load_course
+    redirect_to root_path, alert: 'Not authorized as an trainer.' unless current_user.has_role? :trainer
   end
 end
