@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   end
 
   def assign_default_role
-    add_role(:user)
+    add_role(:user) if roles.blank?
   end
 
   private

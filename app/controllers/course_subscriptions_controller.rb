@@ -1,22 +1,20 @@
 class CourseSubscriptionsController < ApplicationController
   before_filter :authenticate_user!
 
-  def update
-    course.participants << current_user
+  def create
+    if current_user.course_users.where(kick: true).exists?(course_id: course.id)
+      flash[:error] = 'You are banned.'
+    else
+      course.participants << current_user
+    end
   end
 
   def destroy
     if current_user.course_users.where(kick: true).exists?(course_id: course.id)
-      course.course_users.where(user_id: current_user).first.destroy
-    else
       flash[:error] = 'You are banned.'
+    else
+      course.course_users.where(user_id: current_user).first.destroy
     end
-  end
-
-  def kick
-    course_user = CourseUser.where(course_id: params[:course_id], user_id: params[:user_id]).first
-
-    course_user.update_attribute(:kick, true) if course_user
   end
 
   private

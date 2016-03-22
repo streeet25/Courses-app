@@ -43,9 +43,8 @@ class Users::LessonsController < Users::BaseController
   private
 
   def find_course
-    @course = Course.find(params[:course_id])
+    @course = current_user.courses.find(params[:course_id])
   end
-  helper_method :find_course
 
   def find_lesson
     @lesson = find_course.lessons.find(params[:id])

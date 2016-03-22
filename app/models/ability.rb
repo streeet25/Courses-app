@@ -7,7 +7,7 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     else
-      can :manage, Course if user.has_role?(:trainer, Course)
+      can :manage, Course if user.has_role?(:trainer, Course, user_id: user.id)
       can :read, :all
     end
   end

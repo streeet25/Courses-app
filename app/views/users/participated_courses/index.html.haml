@@ -1,0 +1,19 @@
+.content
+  .row
+    .col-md-12
+      - if @courses.present?
+        .container
+          - @courses.each do |course|
+            - unless current_user.try(:banned_in?, course)
+              .col-md-3
+                .thumbnail
+                  = link_to course.title.humanize, course_path(course)
+                  %br
+                  = image_tag course.picture.admin_thumb
+                  %br
+                  = link_to 'Participants', course_participants_path(course)
+        .row
+          .col-md-offset-5
+            = paginate @courses
+      - else
+        %h2 No courses

@@ -5,7 +5,8 @@
       #unsubscribe-button{ style: ('display: none' if current_user.banned_in?(course)) }
         = link_to 'Unsubscribe', course_subscriptions_path(course), method: :delete, remote: true
     - if user_signed_in? && current_user.id == course.user.id
-      #kick-button{ style: ('display: none' if user.banned_in?(course)) }
-        = link_to "Kick", kick_course_subscriptions_path(course, user_id: user.id), method: :patch, remote: true
-      #text{ style: ('display: none' if not user.banned_in?(course)) }
-        %p banned
+      #ban-button{ style: ('display: none' if user.banned_in?(course)) }
+        = link_to "Ban", ban_users_blacklist_path(course_id: course.id, user_id: user.id), method: :patch, remote: true
+      #unban{ style: ('display: none' if not user.banned_in?(course)) }
+        %p banned 
+        = link_to "Unban", unban_users_blacklist_path(course_id: course.id, user_id: user.id), method: :patch, remote: true

@@ -37,7 +37,12 @@
           =link_to edit_users_profile_path do
             %i.fa.fa-user
             %span Edit profile
-        %li 
+        %li
+          =link_to users_participated_courses_path do
+            %i.fa.fa-files-o
+            %span Participated Courses
+      - if current_user && current_user.has_role?(:trainer)
+        %li
           =link_to users_courses_path do
             %i.fa.fa-files-o
             %span My Courses

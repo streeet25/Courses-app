@@ -1,14 +1,12 @@
 class Users::CoursesController < Users::BaseController
   before_filter :load_course, except: :index
-  before_action :my_courses, only: :index
 
   PER_PAGE = 3
 
   before_action :find_course, only: [:edit, :update, :show, :destroy]
 
   def index
-    my_courses.sort! { |a, b| a.updated_at <=> b.updated_at }
-    @paginatable_array = Kaminari.paginate_array(my_courses).page(params[:page]).per(params[:per_page] || PER_PAGE)
+    @courses = current_user.authored_courses.page(params[:page]).per(params[:per_page] || PER_PAGE)
   end
 
   def new
@@ -49,12 +47,8 @@ class Users::CoursesController < Users::BaseController
 
   private
 
-  def my_courses
-    @courses = current_user.authored_courses + current_user.participated_courses
-  end
-
   def find_course
-    @course = Course.find(params[:id])
+    @course = current_user.courses.find(params[:id])
   end
   helper_method :find_course
 

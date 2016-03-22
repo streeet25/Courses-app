@@ -10,7 +10,7 @@ class Course < ActiveRecord::Base
 
   scope :recent, -> { order(created_at: :desc) }
 
-  scope :hiden, -> { where(hiden: false) }
+  scope :visible, -> { where(hiden: false) }
 
   validates :title, presence: true, length: { maximum: 20 }
 
