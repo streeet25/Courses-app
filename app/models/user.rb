@@ -31,11 +31,11 @@ class User < ActiveRecord::Base
     course_users.where(kick: true).exists?(course_id: course.id)
   end
 
+  private
+
   def assign_default_role
     add_role(:user) if roles.blank?
   end
-
-  private
 
   def create_user_profile
     build_profile

@@ -1,9 +1,9 @@
 class Users::CoursesController < Users::BaseController
-  before_filter :load_course, except: :index
-
   PER_PAGE = 3
 
   before_action :find_course, only: [:edit, :update, :show, :destroy]
+
+  authorize_resource
 
   def index
     @courses = current_user.authored_courses.page(params[:page]).per(params[:per_page] || PER_PAGE)
@@ -20,7 +20,6 @@ class Users::CoursesController < Users::BaseController
       redirect_to users_courses_path
     else
       render :new
-      flash[:error] = 'You dont have rights to create course.'
     end
   end
 
@@ -48,15 +47,11 @@ class Users::CoursesController < Users::BaseController
   private
 
   def find_course
-    @course = current_user.courses.find(params[:id])
+    @course = current_user.authored_courses.find(params[:id])
   end
   helper_method :find_course
 
   def courses_params
     params.require(:course).permit(:title, :picture, :hiden)
-  end
-
-  def load_course
-    redirect_to root_path, alert: 'Not authorized as an trainer.' unless current_user.has_role? :trainer
   end
 end

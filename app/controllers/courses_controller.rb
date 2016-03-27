@@ -1,13 +1,13 @@
 class CoursesController < ApplicationController
+  before_filter :load_lesson, only: :show
+  authorize_resource only: :show
   PER_PAGE = 3
-  before_filter :lesson_acces, only: :show
 
   def index
     @courses = Course.recent.visible.page(params[:page]).per(params[:per_page] || PER_PAGE)
   end
 
   def show
-    @lessons = find_lesson.where(hiden: false)
   end
 
   private
@@ -21,7 +21,7 @@ class CoursesController < ApplicationController
     @lesson = course.lessons
   end
 
-  def lesson_acces
-    redirect_to root_path, alert: 'Acces denied.' unless current_user.participate_in?(course) && !current_user.banned_in?(course)
+  def load_lesson
+    @lessons = find_lesson.where(hiden: false)
   end
 end

@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require_tree .
 //= require jquery
 //= require bootstrap-sprockets
 //= require slimScroll/jquery.slimscroll
@@ -22,4 +21,5 @@
 //= require demo 
 //= require pages/dashboard
 //= require bootstrap/modal
+//= require_tree .
 //

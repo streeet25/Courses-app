@@ -11,5 +11,5 @@
   .col-md-2
     = lesson.home_task
   .col-md-2
-    - if user_signed_in? && current_user.id = find_course.user.id
+    - if user_signed_in? && current_user.id = course.user.id
       = link_to 'Show Homeworks', users_course_lesson_hometasks_path(@course, lesson), class: "btn btn-primary"

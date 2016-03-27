@@ -1,5 +1,6 @@
 class Users::LessonsController < Users::BaseController
   before_action :find_course, :find_lesson, only: [:show, :edit, :update, :destroy]
+  authorize_resource
 
   def show
   end
@@ -43,7 +44,7 @@ class Users::LessonsController < Users::BaseController
   private
 
   def find_course
-    @course = current_user.courses.find(params[:course_id])
+    @course = current_user.authored_courses.find(params[:course_id])
   end
 
   def find_lesson
