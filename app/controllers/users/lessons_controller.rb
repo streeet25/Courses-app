@@ -1,17 +1,14 @@
 class Users::LessonsController < Users::BaseController
-  before_action :find_course, :find_lesson, only: [:show, :edit, :update, :destroy]
+  before_action :course, :find_lesson, only: [:edit, :update, :destroy]
   authorize_resource
 
-  def show
-  end
-
   def new
-    @lesson = find_course.lessons.new
-    @lesson_count = find_course.lessons.count + 1
+    @lesson = course.lessons.new
+    @lesson_count = course.lessons.count + 1
   end
 
   def create
-    @lesson = find_course.lessons.new(lesson_params)
+    @lesson = course.lessons.new(lesson_params)
 
     if @lesson.save
       flash[:success] = 'Lesson was successsfull created.'
@@ -23,7 +20,7 @@ class Users::LessonsController < Users::BaseController
   end
 
   def edit
-    @lesson_count = find_course.lessons.count
+    @lesson_count = course.lessons.count
   end
 
   def update
@@ -43,14 +40,13 @@ class Users::LessonsController < Users::BaseController
 
   private
 
-  def find_course
-    @course = current_user.authored_courses.find(params[:course_id])
+  def course
+    @course = Course.find(params[:course_id])
   end
 
   def find_lesson
-    @lesson = find_course.lessons.find(params[:id])
+    @lesson = @course.lessons.find(params[:id])
   end
-  helper_method :find_lesson
 
   def lesson_params
     params.require(:lesson).permit(:title, :position, :description, :lecture_notes, :picture, :home_task)

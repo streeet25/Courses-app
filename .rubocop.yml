@@ -8,6 +8,7 @@ AllCops:
     - 'bin/*'
     - 'spec/*'
     - 'db/schema.rb'
+    - 'app/models/ability.rb'
   TargetRubyVersion: 2.2
   DisplayCopNames: true
 

@@ -1,20 +1,13 @@
 class CourseSubscriptionsController < ApplicationController
   before_filter :authenticate_user!
+  before_action :deny_access unless banned?
 
   def create
-    if current_user.course_users.where(kick: true).exists?(course_id: course.id)
-      flash[:error] = 'You are banned.'
-    else
-      course.participants << current_user
-    end
+    course.participants << current_user
   end
 
   def destroy
-    if current_user.course_users.where(kick: true).exists?(course_id: course.id)
-      flash[:error] = 'You are banned.'
-    else
-      course.course_users.where(user_id: current_user).first.destroy
-    end
+    course.course_users.where(user_id: current_user).first.destroy
   end
 
   private
@@ -28,4 +21,12 @@ class CourseSubscriptionsController < ApplicationController
     @user = User.find(params[:user_id])
   end
   helper_method :user
+
+  def deny_access
+    redirect_to root_path, notice: 'You are banned.'
+  end
+
+  def banned?
+    redirect_to root_path, notice: 'You are banned.' unless current_user.course_users.where(kick: true).exists?(course_id: course.id)
+  end
 end

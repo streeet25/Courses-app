@@ -6,7 +6,7 @@
         = link_to 'Unsubscribe', course_subscriptions_path(course), method: :delete, remote: true
     - if user_signed_in? && current_user.id == course.user.id
       #ban-button{ style: ('display: none' if user.banned_in?(course)) }
-        = link_to "Ban", ban_users_blacklist_path(course_id: course.id, user_id: user.id), method: :patch, remote: true
+        = link_to "Ban", users_blacklist_path(course_id: course.id, user_id: user.id), method: :post, remote: true
       #unban{ style: ('display: none' if not user.banned_in?(course)) }
         %p banned 
-        = link_to "Unban", unban_users_blacklist_path(course_id: course.id, user_id: user.id), method: :patch, remote: true
+        = link_to "Unban", users_blacklist_path(course_id: course.id, user_id: user.id), method: :delete, remote: true

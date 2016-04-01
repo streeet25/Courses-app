@@ -4,30 +4,28 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    can :read, Lesson do |lesson|
-      user.subscribed_to?(lesson.course) && banned_in?(lesson.course)
-    end
-    
-    can :manage, [Profile, Hometask], user_id: user.id
+    can :manage, [Profile], user_id: user.id
 
-    if user.has_role? :admin
-      can :manage, :all
-    end  
+    can :manage, :all if user.has_role? :admin
 
     if user.has_role? :trainer
       can :manage, Course, user_id: user.id
       can :manage, Lesson do |lesson|
         lesson.course.user == user
       end
-      can :read, :all  
+      can :read, :all
     end
 
     can :read, Course do |course|
       user.participate_in?(course) && !user.banned_in?(course)
     end
 
-    can :read, Lesson do |lesson|
-      user.participate_in?(lesson.course) && !user.banned_in?(lesson.course)
+    can :read, Lesson do |l|
+      user.participate_in?(l.course) && user.banned_in?(l.course)
+    end
+
+    can :read, Hometask do |hometask|
+      user.participate_in?(hometask.lesson.course) && !user.banned_in?(hometask.lesson.course)
     end
   end
 end

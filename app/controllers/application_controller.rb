@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
                 ActionController::RoutingError,
                 ActiveRecord::RecordInvalid,
                 with: :redirect_with_error
-
   end
 
   layout :choose_layout
@@ -22,7 +21,7 @@ class ApplicationController < ActionController::Base
   private
 
   def choose_layout
-    devise_controller? ? 'application' : 'application'
+    devise_controller? ? 'devise' : 'application'
   end
 
   def redirect_with_error

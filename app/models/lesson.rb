@@ -10,5 +10,7 @@ class Lesson < ActiveRecord::Base
   validates :description, presence: true, length: { maximum: 100 }
   validates :home_task, presence: true
 
+  scope :visible, -> { where(hiden: false) }
+
   scope :sorted, -> { order('lessons.position ASC') }
 end

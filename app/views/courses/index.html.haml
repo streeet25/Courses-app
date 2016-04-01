@@ -6,8 +6,10 @@
           - @courses.each do |course|
             .col-md-3
               .thumbnail
-                - if user_signed_in?
-                  = link_to course.title.humanize, course_path(course)
+                - if current_user.participate_in?(course) && !current_user.banned_in?(course)
+                  = link_to course.title.humanize, course_lessons_path(@lesson, course_id: course.id)
+                - else 
+                  = course.title.humanize
                 %br
                 = image_tag course.picture.admin_thumb
                 - if current_user.try(:banned_in?, course)
