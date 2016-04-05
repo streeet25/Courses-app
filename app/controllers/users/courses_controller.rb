@@ -1,7 +1,7 @@
 class Users::CoursesController < Users::BaseController
   PER_PAGE = 3
 
-  before_action :find_course, only: [:edit, :update, :show, :destroy]
+  before_action :find_course, only: [:edit, :update, :destroy]
 
   authorize_resource
 
@@ -32,10 +32,6 @@ class Users::CoursesController < Users::BaseController
     else
       render :edit
     end
-  end
-
-  def show
-    @lessons = find_course.lessons.sorted.page(params[:page]).per(params[:per_page] || PER_PAGE)
   end
 
   def destroy

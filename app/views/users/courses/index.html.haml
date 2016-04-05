@@ -5,7 +5,7 @@
         - @courses.each do |course|
           .col-md-3
             .thumbnail
-              = link_to course.title, users_course_path(course)
+              = link_to course.title, users_course_lessons_path(course)
               = image_tag course.picture.thumb
               = link_to 'Edit Course', edit_users_course_path(course)
               = link_to 'Delete Course', users_course_path(course), method: :delete, data: { confirm: 'Are you sure' }

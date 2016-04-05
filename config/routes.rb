@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resource :blacklist, only: [:create, :destroy], controller: :course_bans
     resource  :profile, only: [:edit, :update], controller: :profile
     resources :participated_courses, only: :index, controller: :participated_courses
-    resources :courses do
+    resources :courses, except: [:show] do
       resources :lessons do
         resources :hometasks
       end

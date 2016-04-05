@@ -1,6 +1,6 @@
 class CourseSubscriptionsController < ApplicationController
   before_filter :authenticate_user!
-  before_action :deny_access unless banned?
+  before_action :deny_access unless :banned?
 
   def create
     course.participants << current_user
@@ -27,6 +27,7 @@ class CourseSubscriptionsController < ApplicationController
   end
 
   def banned?
-    redirect_to root_path, notice: 'You are banned.' unless current_user.course_users.where(kick: true).exists?(course_id: course.id)
+    current_user.course_users.where(kick: true).exists?(course_id: course.id)
   end
+
 end

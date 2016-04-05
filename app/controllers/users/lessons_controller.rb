@@ -2,6 +2,10 @@ class Users::LessonsController < Users::BaseController
   before_action :course, :find_lesson, only: [:edit, :update, :destroy]
   authorize_resource
 
+  def index
+    @lessons = course.lessons.sorted
+  end
+
   def new
     @lesson = course.lessons.new
     @lesson_count = course.lessons.count + 1
@@ -12,7 +16,7 @@ class Users::LessonsController < Users::BaseController
 
     if @lesson.save
       flash[:success] = 'Lesson was successsfull created.'
-      redirect_to users_course_path(@course)
+      redirect_to users_course_lessons_path(@course)
     else
       @lesson_count = @lesson.count + 1
       render :new
@@ -24,18 +28,18 @@ class Users::LessonsController < Users::BaseController
   end
 
   def update
-    if @lesson.update(lesson_params)
+    if find_lesson.update(lesson_params)
       flash[:success] = 'Lesson was updated.'
-      redirect_to users_course_path(find_course)
+      redirect_to users_course_lessons_path(course)
     else
-      @lesson_count = find_lesson.count
+      @lesson_count = course.lessons.count
       render :edit
     end
   end
 
   def destroy
-    @lesson.destroy
-    redirect_to users_course_path(@course)
+    find_lesson.destroy
+    redirect_to users_course_lessons_path(course)
   end
 
   private
@@ -44,11 +48,13 @@ class Users::LessonsController < Users::BaseController
     @course = Course.find(params[:course_id])
   end
 
+
+
   def find_lesson
-    @lesson = @course.lessons.find(params[:id])
+    @lesson = course.lessons.find(params[:id])
   end
 
   def lesson_params
-    params.require(:lesson).permit(:title, :position, :description, :lecture_notes, :picture, :home_task)
+    params.require(:lesson).permit(:title, :position, :description, :lecture_notes, :picture, :home_task, :hiden, :date_of)
   end
 end

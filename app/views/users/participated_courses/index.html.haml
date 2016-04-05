@@ -7,7 +7,7 @@
             - unless current_user.try(:banned_in?, course)
               .col-md-3
                 .thumbnail
-                  = link_to course.title.humanize, course_lesson_path(course, id: course.id)
+                  = link_to course.title.humanize, course_lessons_path(course, id: course.id)
                   %br
                   = image_tag course.picture.admin_thumb
                   %br
