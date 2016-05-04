@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   include Omniauthable
 
+  before_save  :ensure_authentication_token
   after_create :create_user_profile
 
   after_create :assign_default_role
@@ -15,7 +16,7 @@ class User < ActiveRecord::Base
 
   has_one :profile, dependent: :destroy
   has_many :authored_courses, class_name: 'Course', foreign_key: :user_id
-  has_many :social_profiles
+  has_many :social_profiles, dependent: :destroy
   has_many :course_users, dependent: :destroy
   has_many :participated_courses, through: :course_users, source: :course
 
@@ -38,7 +39,21 @@ class User < ActiveRecord::Base
   end
 
   def create_user_profile
+    return if profile.present?
     build_profile
     profile.save(validates: false)
+  end
+
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
+
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.exists?(authentication_token: token)
+    end
   end
 end

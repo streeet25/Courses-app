@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   PER_PAGE = 3
 
   def index
-    @courses = Course.recent.visible.page(params[:page]).per(params[:per_page] || PER_PAGE)
+    @courses = Course.recent.visible.includes(:user).page(params[:page]).per(params[:per_page] || PER_PAGE)
   end
 
   private

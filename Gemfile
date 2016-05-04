@@ -19,12 +19,20 @@ gem 'haml'
 gem 'rubocop'
 gem 'rspec-rails'
 gem 'devise'
+
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+
+gem 'twitter'
+gem 'koala'
+
 gem 'acts_as_list'
+
 gem 'rolify'
 gem 'cancancan'
+
+gem 'active_model_serializers'
 
 group :assets do
   gem 'therubyracer'
