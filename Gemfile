@@ -5,6 +5,7 @@ gem 'sprockets', '~> 3.0'
 gem 'rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-ui-rails'
+gem 'activerecord-sortable'
 gem 'sass-rails', '>= 3.2'
 gem 'coffee-rails'
 gem 'jquery-rails'
@@ -18,7 +19,12 @@ gem 'haml'
 gem 'rubocop'
 gem 'rspec-rails'
 gem 'devise'
-gem 'rails_12factor'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'acts_as_list'
+gem 'rolify'
+gem 'cancancan'
 
 group :assets do
   gem 'therubyracer'
@@ -31,6 +37,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'faker'
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
 end
 
 group :development do
@@ -40,6 +47,7 @@ group :development do
   gem 'guard-rspec'
   gem 'better_errors'
   gem 'spring'
+  gem 'bullet'
 end
 
 group :test do

@@ -1,0 +1,29 @@
+.content
+  .row
+    .col-md-12
+      %h4 Hometask
+
+      %table.table.table-bordered
+        %tbody
+          %tr
+            %th Text of Hometask
+            %th Hometask Name
+          - @hometasks.each do |task|
+            %tr
+              %td
+                = task.name
+              %td
+                = task.hometask
+
+      %button.btn.btn-primary{"data-target" => "#exampleModal", "data-toggle" => "modal", "data-whatever" => "Deliver Hometask", :type => "button"}Deliver Hometask
+      #exampleModal.modal.fade{"aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog{:role => "document"}
+          .modal-content
+            .modal-header
+              %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                %span{"aria-hidden" => "true"}
+              %h4#exampleModalLabel.modal-title New Hometask
+            .modal-body
+              .form-group
+                = render 'form', hometask: @hometask
+

@@ -8,7 +8,7 @@
         .pull-left.image
           = image_tag 'user2-160x160.jpg', class: 'img-circle'
         .pull-left.info
-          %p Alexander Pierce
+          %p= current_user.first_name
           %a{:href => "#"}
             %i.fa.fa-circle.text-success
             Online
@@ -32,5 +32,19 @@
         = link_to courses_path do
           %i.fa.fa-files-o
           %span Courses
+      - if user_signed_in?
+        %li 
+          =link_to edit_users_profile_path do
+            %i.fa.fa-user
+            %span Edit profile
+        %li
+          =link_to users_participated_courses_path do
+            %i.fa.fa-files-o
+            %span Participated Courses
+      - if current_user && current_user.has_role?(:trainer)
+        %li
+          =link_to users_courses_path do
+            %i.fa.fa-files-o
+            %span My Courses
   / /.sidebar
 / Content Wrapper. Contains page content

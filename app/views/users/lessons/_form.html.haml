@@ -1,0 +1,17 @@
+= simple_form_for [@course, @lesson], :url => for_action, html: {multipart: true} do |f|
+  .border-top.border-bottom{:style => "overflow:hidden"}
+    .form-inputs.col-md-6.border-right
+      %h2 Main info
+      = f.input :title, :label => "Title"
+      = f.input :description, :label => "Lesson description"
+      = f.select(:position, 1..@lesson_count)
+      = f.input :lecture_notes, :label => "Lecture notes"
+      = f.input :home_task, :label => "Home work"
+      = f.input :hiden, as: :boolean
+      .container.col-md-12
+        %p.left Picture
+        = f.file_field :picture, :label => "Image", :class => 'right'
+    .form-inputs.col-md-6
+  .right
+    = link_to 'Back', url_for(:back), :class => 'btn btn-default  rating-item-btn'
+    = f.submit :class => 'btn btn-success  rating-item-btn'

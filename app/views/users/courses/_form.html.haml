@@ -2,5 +2,6 @@
   .form-group 
 = simple_form_for [:users, course], html: { multipart: true } do |f|
   = f.input :title
+  = f.input :hiden, as: :boolean
   = f.file_field :picture
   = f.submit "Save", :class => "btn-xs btn-success rating-submit-btn margin-rating-form"

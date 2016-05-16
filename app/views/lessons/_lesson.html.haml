@@ -1,0 +1,15 @@
+%li.container
+  .col-md-2
+    = image_tag lesson.picture.thumb
+  .col-md-2
+    %h4= lesson.title
+  .row
+    .col-md-2
+      = lesson.description
+  .col-md-2
+    = lesson.lecture_notes
+  .col-md-2
+    = lesson.home_task
+  .col-md-2
+    - if user_signed_in? && current_user.id = @course.user.id
+      = link_to 'Show Homeworks', users_course_lesson_hometasks_path(@course, lesson), class: "btn btn-primary"

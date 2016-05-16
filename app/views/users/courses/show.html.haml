@@ -1,0 +1,8 @@
+.ratings_heading
+  %h1.rating-h1= @course.title
+  = link_to 'Add lesson', new_users_course_lesson_path(@course), :class => "btn btn-success right"
+.margin-top-10
+  - if @lessons.present?
+    %ol.list-group= render @lessons
+  - else
+    %h2.rating-h1 You don't have lessons now.

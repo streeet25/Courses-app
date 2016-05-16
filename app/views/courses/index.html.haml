@@ -2,12 +2,23 @@
   .row
     .col-md-12
       - if @courses.present?
-        - @courses.each do |course|
-          .col-md-3
-            .thumbnail
-              = course.title.humanize
-              %br
-              = image_tag course.picture.admin_thumb
-        = paginate @courses
+        .container
+          - @courses.each do |course|
+            .col-md-3
+              .thumbnail
+                - if current_user.participate_in?(course) && !current_user.banned_in?(course)
+                  = link_to course.title.humanize, course_lessons_path(@lesson, course_id: course.id)
+                - else 
+                  = course.title.humanize
+                %br
+                = image_tag course.picture.admin_thumb
+                - if current_user.try(:banned_in?, course)
+                  %p You are deducted
+                - else
+                  %br
+                  = link_to 'Participants', course_participants_path(course)
+        .row
+          .col-md-offset-5
+            = paginate @courses
       - else
         %h2 No courses
